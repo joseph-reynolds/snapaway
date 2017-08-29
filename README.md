@@ -16,6 +16,7 @@ Here are some of the parameters of this project:
  - low cost, like $300 USD total (see details below)
  - still pictures are good enough, video is not needed
  - can access surveillance photos from a few days back
+   (would like 9 days)
  - can access photos from an iPad or iPhone
    and it is okay if we can only access when we are at home
  - cameras are connected to my home WiFi.  Currently: This is
@@ -26,7 +27,16 @@ Here are some of the parameters of this project:
    + transport layer security (SSL)
    + (eventually) photos should be encrypted on disk so that can only
      be viewed by authorized users
- 
+ - no fixed upper limit on number of cameras
+ - each camera has access to 120V power
+ - cameras are housed indoors (controlled temperature and humidity)
+ - would like battery backup in case of power failure
+ - would like to avoid requirement for home WiFi connection
+   (but need real-time clock, etc)
+ - would like to tie into other sensors:
+    + motion detectors (PIR)
+    + door open switches
+
 Project difficulty:
 This is an intermediate level project.  There are many fine tutorials on
 the following topics and I'll assume you can get up to speed as needed:
