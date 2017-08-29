@@ -40,9 +40,8 @@ Here are some of the parameters of this project:
 Project difficulty:
 This is an intermediate level project.  There are many fine tutorials on
 the following topics and I'll assume you can get up to speed as needed:
- - Set up a Raspberry Pi hardware
- - Linux (Debian / Raspbian) operating system
- - Python programming
+ - Set up a Raspberry Pi hardware (see: learn.adafruit.com/raspberry-pi-zero-creation)
+ - Python programming (see: python.org)
  - more...
  To re-create the project, you'll have to build devices, load software,
  configure networks, operating systems setting, and software.
@@ -56,8 +55,11 @@ The material cost includes:
    + 2.1A power supply (USB micro)
  - USB powered hub with USB OTG
  - USB keyboard
- - HDMI monitor with HDMI mini adapter
- - I am currently using a Windows workstation to coordinate everything.
+ - Adapter: USB A to micro B
+ - Adapter: HDMI to HDMI mini
+ - I am also using a HDMI monitor, not included in the costs
+ - I am currently using a Windows workstation to coordinate everything,
+   not included in the cost.
 
 Terminology:
   camera device: The term "camera device" refers to the Raspberry Pi computer
