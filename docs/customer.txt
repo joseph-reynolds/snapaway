@@ -1,0 +1,33 @@
+snapaway customer docs
+
+This is the documentation for snapaway customers.  That is, details about
+how to use your new camera system.
+If you got this, you are an ALPHA tester, which means the product is not yet
+ready for market and you should expect to find problems.
+Please
+
+This is part of a set of documentation in github.com/joseph-reynolds/snapaway:
+ - docs for devlopers -- how the software works
+ - docs for camera administrators -- how to configure a camera system
+ - docs for camera end users -- how to control the camera and look at pictures
+
+See also the README file.
+____________________________
+
+Your camera administrator should have set up camera devices you requested
+and given you their names.
+
+To view the photos, use a device on the same network as your camera devices.
+Type this into your browser:
+   raspi0.local:5000
+
+____________________________
+
+Troubleshooting
+ - No photos?  Try waving your hand in front of the lens.
+ - Cannot connect to the browser? Check if your camera device is turned on.
+   You should see a green light inside the case.
+ - Cannot connect your browser?  You must use a device on the same network
+   as your camera devices.
+   For example, a laptop or iPad.  An iPhone may not work because it may be connected
+   via the cell tower.

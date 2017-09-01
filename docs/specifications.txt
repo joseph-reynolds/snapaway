@@ -1,0 +1,70 @@
+snapaway specifications
+
+This is the documentation for snapaway's specifications.  That is, details about
+the hardware and software used to make the project, and details about what it is
+capable of.
+
+This is part of a set of documentation in github.com/joseph-reynolds/snapaway:
+ - docs for devlopers -- how the software works
+ - docs for camera administrators -- how to configure a camera system
+ - docs for camera end users -- how to control the camera and look at pictures
+
+See also the README file.
+
+
+Scope of this project:
+Here are some of the parameters of this project:
+ - The project is based specifically on the Raspberry Pi (RPI).
+   As written, this project uses the RPI Zero W.
+   If you perfer, you can "easily" use a different RPI, if it has WiFi.
+ - The project is based specificaly on the Raspberry Pi Camera (RaspiCam).
+   I used version V2.  The software uses motion data specifically from the
+   RaspiCam, and USB web cameras cannot be used.
+ - The current draw is less than 500 milliamps at 5V.  I tried this with an old
+   700mA phone charger, and it works okay.
+
+ - low cost, like $50 USD per camera (see details below)
+ - still pictures are good enough, video is not needed
+ - can access surveillance photos from a few days back
+   (would like 9 days)
+ - can access photos from an iPad or iPhone
+   and it is okay if we can access only when we are at home
+ - cameras are connected to my home WiFi.  Currently: This is
+   for the NTP servers and ease of development.  I would like to 
+   remove this requirement, say by adding a Real Time Clock (RTC).
+ - security:
+   + password protection
+   + transport layer security (SSL)
+   + (eventually) photos should be encrypted on disk so that can only
+     be viewed by authorized users
+ - no fixed upper limit on number of cameras
+ - each camera has access to 120V power (alternate: 5V power, at least 500mA, should be 700mA)
+ - cameras are housed indoors (controlled temperature and humidity)
+ - would like battery backup in case of power failure
+ - would like to avoid requirement for home WiFi connection
+   (but need real-time clock, etc)
+ - would like to tie into other sensors:
+    + motion detectors (PIR)
+    + door open switches
+ - would like to add multiple cameras (another camera) to each RPI.
+
+
+Project materials:
+I used 4 cameras.  You only really need one.
+I used the USB OTG, USB hub, keyboard, HDMI to help debug up the system.
+You may not need these items.
+
+The material cost includes:
+ - 4 sets of Raspberry Pi computers, each with:
+   + Raspberry Pi Zero W
+   + Raspberry Pi Camera (with case and connector)
+   + 16Gb SanDisk card (micro), although 8Gb is minimum
+   + 2.1A power supply (USB micro), although 700mA should be considered minimum
+ - USB powered hub with USB OTG
+ - USB keyboard
+ - Adapter: USB A to micro B
+ - Adapter: HDMI to HDMI mini
+ - I am also using a HDMI monitor, not included in the costs
+ - I am currently using a Windows workstation to coordinate everything,
+   not included in the cost.
+

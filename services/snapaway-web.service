@@ -1,0 +1,14 @@
+# snapaway-web.service for systemctl
+
+[Unit]
+Description=Web app server for snapaway photos
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/bin/snapaway-web.py
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+Alias=snapaway-web.service

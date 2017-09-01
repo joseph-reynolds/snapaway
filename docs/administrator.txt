@@ -1,0 +1,32 @@
+snapaway docs for camera administrators
+
+This is the documentation for snapaway administrators.  That is, folks who want
+to set up the cameras.
+
+This is part of a set of documentation in github.com/joseph-reynolds/snapaway:
+ - docs for devlopers -- how the software works
+ - docs for camera administrators -- how to configure a camera system
+ - docs for camera end users -- how to control the camera and look at pictures
+
+See also the README file.
+
+_______________
+
+The basic producedure is:
+ - get the parts (see the specs in docs/specification.txt)
+ - assemble each camera device
+ - put Raspbian linux on the SSD card
+ - configure each RPI:
+    + each one should have an unique name, e.g., raspi0, raspi1, raspi2, etc
+    + configure the locale and timezone
+    + change the password for user pi.  All password must be the same.
+    + configure ssh
+    + stop the camera with command: shutdown now
+ - deploy the camera to its spot and plug it in
+ - use the snapaway-admin tool to update the camera's software and
+   deploy snapaway software.  This should start the camera and its website running. 
+   Debug via ssh: sudo systemctl status snapaway-cam
+ - Check for images on the camera's web site.
+   If any require rotation, modify snapaway-cam.py and redeploy.
+ - Turn over the system to the customer.  Show them how the website works, and 
+   what the camera names are.

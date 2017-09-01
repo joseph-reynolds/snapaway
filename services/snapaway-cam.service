@@ -1,0 +1,14 @@
+# snapaway-cam.service for systemctl
+
+[Unit]
+Description=Capture Raspberry Pi security photos
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/bin/snapaway-cam.py
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target
+Alias=snapaway-cam.service

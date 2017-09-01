@@ -1,0 +1,67 @@
+snapaway docs for developers
+
+This is the documentation for snapaway developers.  That is, folks who want
+to understand how the software and hardware works.
+
+This is part of a set of documentation in github.com/joseph-reynolds/snapaway:
+ - docs for devlopers -- how the software works
+ - docs for camera administrators -- how to configure a camera system
+ - docs for camera end users -- how to control the camera and look at pictures
+
+See also the README file.
+
+
+Project difficulty:
+This is an intermediate level project.  There are many fine tutorials on
+the following topics and I'll assume you can get up to speed as needed:
+ - Set up a Raspberry Pi hardware (see: learn.adafruit.com/raspberry-pi-zero-creation)
+ - Python programming (see: python.org)
+ - more...
+ To re-create the project, you'll have to build devices, load software,
+ configure networks, operating systems setting, and software.
+
+Terminology:
+  camera device: The term "camera device" refers to the Raspberry Pi computer
+            coupled with its Camera, case, power supply, etc., and loaded
+            with the software from this project.
+
+Project management:
+  I am the sole contributor to this project.  I intend to use github issues to
+  track development and my wish list.
+  I am open to contributions, but don't expect any.
+  If you have ideas, fixes, or suggestions, please contact me.  But understand that
+  my time to work on this project is limited.
+  
+Current state of development:
+ - The basic function of the camera software is working.  It watches the video feed and
+   saves images that contain motion.  These are saved on the local storage.
+   This is program snapaway-cam.py.
+ - There is a Linux systemctl systemd.service to start the camera during boot.
+ - There is an admin tool to configure the camera devices.
+   It is crude but effective.  It updates the software packages on the camera devices,
+   installs the snapaway software, and configures systemctl services.  All other
+   debugging is manual.
+   Basic use is:
+     (set your camera network, e.g., with camera host names like raspi0, raspi1)
+     (type your ssh password into the program (sorry, see gitHub snapaway issue 3))
+     snapaway-admin.py
+       use raspi0
+       setup
+       refresh
+       use raspi1
+       ...etc...
+       exit
+ - There is a simple web-app running on each camera device to access
+   the saved pictures.  This is controlled by the snapaway-web systemctl service.
+   Be careful, it uses Python Flask and allows anyone to access the camera, so should
+   be used behind a firewall and then replaced.  Basic use is:
+    - (go to a browser on the same local network at the camera devices)
+    - http://raspi2.local:5000/
+    - (click on list, prev, or next)
+
+Camera technology:
+I am not an image processing expert.
+The code that access the camera is snapaway-cam.py.  This is in Python 2.7.
+This software was derived directly from the Python picamera docs.
+I used two frame grabbers, one for motion data, and the other for video images.
+The video frames are saved to disk files only when motion is detected.
