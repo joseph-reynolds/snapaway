@@ -21,7 +21,7 @@ Here are some of the parameters of this project:
    and it is okay if we can only access when we are at home
  - cameras are connected to my home WiFi.  Currently: This is
    for the NTP servers and ease of development.  I would like to 
-   remove this requirement.
+   remove this requirement, say by adding a Real Time Clock (RTC).
  - security:
    + password protection
    + transport layer security (SSL)
