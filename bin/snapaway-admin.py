@@ -4,12 +4,12 @@
 
 """snapaway-admin Administrate snapaway camera devices
 
-
-This issue is to create an tool to help set up the camera devices.
-The main idea is that we'll have a camera device (RasPi with camera) with the Raspbian operating system freshly installed, configured for my personal WiFi network and ssh. This tool then configures the rest.
+This is a tool to help set up the camera devices.
+The main idea is that we'll have a camera device (RasPi with camera)
+with the Raspbian operating system freshly installed, configured for 
+the WiFi network and ssh. This tool then configures the rest.
 
 The basic user stories for the camera administrator are:
-
     Rename the camera device (its hostname) and give it a description.
     Loading and updating software packages (apt)
     Load the camera device's code ("snapaway")
@@ -23,8 +23,7 @@ At some point, I would like to change these to be "reborn in the cloud", that is
 have a web application with REST APIs to perform these functions.
 But for now, a command-line tool.
 
-Commands to manage devices:
-
+Ideas for commands to manage devices:
     add-device hostname user pswd description camera-parms
     remove-device hostname
     update-device hostname description camera-parms
@@ -32,14 +31,12 @@ Commands to manage devices:
     select-device hostname
 
 Commands to work with devices.
-These work with a specific device. Use "select-device" before using these:
-
+These work with a specific device. Use "use" before using these:
     update-packages
     install-snapaway
     systemctl [start, stop, enable, disable, status]
 
 Commands to work with device's saved images:
-
     ls-pics
     remove-all-pics
     get-pic
@@ -111,6 +108,22 @@ setup_operations = [
     "sudo pip install Flask",
 ] + setup_refresh
 
+show_settings = [
+    "sudo systemctl status snapaway-cam",
+    "sudo journalctl _SYSTEMD_UNIT=snapaway-cam.service",
+    "sudo systemctl status snapaway-web",
+    "sudo journalctl _SYSTEMD_UNIT=snapaway-web.service",
+]
+
+remove_pics = [
+    "rm pics/saved/image*.jpg"
+]
+
+shutdown_steps = [
+    "sudo systemctl stop snapaway-cam",
+    "sudo systemctl stop snapaway-web",
+    "sudo shutdown now",
+]
 
 class SnapawayAdmin(cmd.Cmd):
     intro = 'Welcome to the snapaway admin tool.  Type help or ? to list commands.\n'
@@ -140,8 +153,15 @@ class SnapawayAdmin(cmd.Cmd):
     def do_refresh(self, arg):
         "Set up snapaway on the camera device"
         self.perform_operations(setup_refresh)
-    def do_systemctl(self, arg):
-        pass # TO DO
+    def do_diagnose(self, arg):
+        "Show snapaway diagnostic settings on the camera device"
+        self.perform_operations(show_settings)
+    def do_rmpics(self, arg):
+        "Delete saved pictures on the camera device"
+        self.perform_operations(remove_pics)
+    def do_shutdown(self, arg):
+        "Safely shut down the camera device"
+        self.perform_operations(shutdown_steps)
     def perform_operations(self, operations):
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -154,6 +174,13 @@ class SnapawayAdmin(cmd.Cmd):
         except socket.gaierror:
             print("Cannot connect via ssh")
             return
+        except paramiko.ssh_exception.AuthenticationException:
+            print("Authentication failed")
+            print("Try this:")
+            print("  ssh-keygen")
+            print("  ssh-copy-id %s" % self.devicename + ".local")
+            print("Then try the command again.  Goodbye!")
+            raise
         ftp = None
         try:
             for oper in operations:
@@ -178,9 +205,6 @@ class SnapawayAdmin(cmd.Cmd):
      
 
 if __name__ == '__main__':
-    if password == "*********":
-        print("Please configure the password. Modify bin/snapaway-admin.py")
-        exit(1)
     mypath = os.path.dirname(os.path.abspath(__file__)) + "/.."
     SnapawayAdmin().cmdloop()
 
