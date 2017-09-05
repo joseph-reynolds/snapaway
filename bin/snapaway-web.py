@@ -45,11 +45,10 @@ def logs():
 def list():
     pics = get_pics()
     s = "Pictures: <br>"
-    s += '''<ul style="list-style-type:disc">'''
-    for pic in pics:
-        s += ('''<li> <a href="/pic/%d">%s - %d</a></li>'''
-             % (pic[0], pic[1], pic[0]))
-    s += '''</ul>'''
+    s += '''<ul style="list-style-type:disc">\n'''
+    s += ''.join([('''<li> <a href="/pic/%d">%s - %d</a></li>\n'''
+                   % (pic[0], pic[1], pic[0])) for pic in pics])
+    s += '''</ul>\n'''
     return s
 
 @app.route('/pic/<int:picnum>')

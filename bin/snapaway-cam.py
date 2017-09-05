@@ -75,8 +75,8 @@ parms = {
 parms["camera"] = {}
 parms["camera"]["rotation"] = 0
 parms["motion"] = {}
-parms["motion"]["sensitivity"] = 50
-parms["motion"]["threshold"] = 2
+parms["motion"]["sensitivity"] = 35
+parms["motion"]["threshold"] = 10
 parms["pics"] = {}
 parms["pics"]["dir"] = PICS_SAVED
 parms["pics"]["max_bytes"] = 4 * 1024 * 1024 * 1024
@@ -92,7 +92,7 @@ elif HOSTNAME == "raspi2":
     parms["motion"]["sensitivity"] = 35
     parms["motion"]["threshold"] = 10
 elif HOSTNAME == "raspi3":
-    parms["camera"]["rotation"] = 180
+    parms["camera"]["rotation"] = 270
 
 mkdir_p(parms["pics"]["dir"])
 
