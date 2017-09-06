@@ -44,6 +44,11 @@ Commands to work with device's saved images:
 Limited scope: This is NOT intended to be the way to get pictures from the camera. Two ideas are: (1) short term, create a web application server on each camera to serve pictures, and (2) create a REST API on each camera to serve pictures to a web application hosted on a workstation that connects to many different cameras.
 """
 
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+from __future__ import division
+
 import cmd
 import os
 import paramiko
@@ -183,11 +188,12 @@ class SnapawayAdmin(cmd.Cmd):
         ftp = None
         try:
             for oper in operations:
-                if isinstance(oper, str):
+                if isinstance(oper, unicode):
                     cmd = oper
                     print("Running command: %s" % cmd)
                     stdin, stdout, stderr = ssh.exec_command(cmd)
-                    print("Result:\n", stdout.readlines())
+                    for line in stdout.readlines():
+                        print(line, end='')
                 elif isinstance(oper, tuple):
                     filenames = oper
                     if not ftp:
@@ -196,6 +202,7 @@ class SnapawayAdmin(cmd.Cmd):
                     print("Putting file %s" % filenames[1])
                     ftp.put(mypath + "/" + filenames[0], filenames[1])
                 else:
+                    print("Oops, oper type is " + oper)
                     raise RuntimeError
         finally:
             ssh.close()
@@ -206,5 +213,3 @@ class SnapawayAdmin(cmd.Cmd):
 if __name__ == '__main__':
     mypath = os.path.dirname(os.path.abspath(__file__)) + "/.."
     SnapawayAdmin().cmdloop()
-
-
