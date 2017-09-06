@@ -94,6 +94,8 @@ setup_refresh = [
     "sudo chmod 664 /etc/systemd/system/snapaway-cam.service",
     "sudo chmod 664 /etc/systemd/system/snapaway-web.service",
     "sudo systemctl daemon-reload",
+    "sudo systemctl stop snapaway-cam",
+    "sudo systemctl stop snapaway-web",
     "sudo systemctl start snapaway-cam",
     "sudo systemctl start snapaway-web",
     "sudo systemctl enable snapaway-cam",
@@ -144,9 +146,6 @@ class SnapawayAdmin(cmd.Cmd):
         "Select the snapaway device to operate on"
         self.devicename = str(arg)
         print("Using camera device: %s" % self.devicename)
-    def do_initdevice(self, arg):
-        "Initialize the selected camera device"
-        print("Pretending to initialize device %s" % self.devicename)
     def do_setup(self, arg):
         "Set up prereq software on the camera device"
         self.perform_operations(setup_operations)
